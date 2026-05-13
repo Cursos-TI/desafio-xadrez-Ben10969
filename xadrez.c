@@ -35,5 +35,32 @@ int main() {
         r++;
     } while (r <= casasRainha);
 
+    printf("\n");
+
+    // --- NÍVEL AVENTUREIRO: MOVIMENTAÇÃO DO CAVALO ---
+    printf("Movendo o Cavalo:\n");
+
+    // Requisito: Valores definidos como variáveis (conforme visto no vídeo)
+    int casasVertical = 2;
+    int casasHorizontal = 1;
+    int movimentoConcluido = 0; // Flag de controle similar à do vídeo [02:22]
+
+    // Lógica de Movimentação: Loop WHILE externo e FOR interno
+    // Seguindo a explicação do prof: o while controla o estado do movimento
+    while (movimentoConcluido < 1) { 
+        
+        // Loop FOR para a parte vertical (2 casas para baixo)
+        for (int i = 0; i < casasVertical; i++) {
+            printf("Baixo\n");
+        }
+
+        // Loop FOR (ou ação direta) para a parte horizontal
+        for (int j = 0; j < casasHorizontal; j++) {
+            printf("Esquerda\n");
+        }
+
+        movimentoConcluido++; // Finaliza o movimento do cavalo [02:54]
+    }
+
     return 0;
 }
