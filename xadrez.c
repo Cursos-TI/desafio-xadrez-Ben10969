@@ -1,66 +1,65 @@
 #include <stdio.h>
 
-int main() {
-    // --- Nível Novato: Movimentação das Peças ---
+// --- RECURSIVIDADE: O Robô que repete a ordem para si mesmo ---
 
-    // 1. Implementação de Movimentação do Bispo
-    // Sugestão: Repetição para diagonal (Cima, Direita) - Usaremos WHILE
-    printf("Movendo o Bispo:\n");
-    int casasBispo = 5;
-    int b = 1;
-    while (b <= casasBispo) {
-        printf("Cima, Direita\n");
-        b++;
-    }
-
-    printf("\n"); // Espaço entre as peças
-
-    // 2. Implementação de Movimentação da Torre
-    // Sugestão: Repetição para a direita - Usaremos FOR
-    printf("Movendo a Torre:\n");
-    int casasTorre = 5;
-    for (int i = 1; i <= casasTorre; i++) {
+void moverTorre(int casas) {
+    if (casas > 0) { // Enquanto ainda restarem casas no estoque...
         printf("Direita\n");
+        moverTorre(casas - 1); // O robô chama a si mesmo para a próxima casa
     }
+}
 
-    printf("\n");
-
-    // 3. Implementação de Movimentação da Rainha
-    // Sugestão: Repetição para a esquerda - Usaremos DO-WHILE
-    printf("Movendo a Rainha:\n");
-    int casasRainha = 8;
-    int r = 1;
-    do {
+void moverRainha(int casas) {
+    if (casas > 0) {
         printf("Esquerda\n");
-        r++;
-    } while (r <= casasRainha);
+        moverRainha(casas - 1);
+    }
+}
 
+// Bispo com Recursividade (conforme pedido: uma função que se chama)
+void moverBispoRecursivo(int casas) {
+    if (casas > 0) {
+        printf("Cima, Direita\n");
+        moverBispoRecursivo(casas - 1);
+    }
+}
+
+int main() {
+    // 1. Movimentação com Recursividade
+    printf("Movendo a Torre:\n");
+    moverTorre(5);
     printf("\n");
 
-    // --- NÍVEL AVENTUREIRO: MOVIMENTAÇÃO DO CAVALO ---
-    printf("Movendo o Cavalo:\n");
+    printf("Movendo a Rainha:\n");
+    moverRainha(8);
+    printf("\n");
 
-    // Requisito: Valores definidos como variáveis (conforme visto no vídeo)
-    int casasVertical = 2;
-    int casasHorizontal = 1;
-    int movimentoConcluido = 0; // Flag de controle similar à do vídeo [02:22]
-
-    // Lógica de Movimentação: Loop WHILE externo e FOR interno
-    // Seguindo a explicação do prof: o while controla o estado do movimento
-    while (movimentoConcluido < 1) { 
-        
-        // Loop FOR para a parte vertical (2 casas para baixo)
-        for (int i = 0; i < casasVertical; i++) {
-            printf("Baixo\n");
+    // 2. Bispo com Loops Aninhados (Eixo Vertical e Horizontal)
+    // O desafio pede: Externo Vertical, Interno Horizontal
+    printf("Movendo o Bispo (Loops Aninhados):\n");
+    for (int v = 1; v <= 5; v++) { // Loop Vertical
+        for (int h = 1; h <= 1; h++) { // Loop Horizontal
+            printf("Cima, Direita\n");
         }
-
-        // Loop FOR (ou ação direta) para a parte horizontal
-        for (int j = 0; j < casasHorizontal; j++) {
-            printf("Esquerda\n");
-        }
-
-        movimentoConcluido++; // Finaliza o movimento do cavalo [02:54]
     }
+    printf("\n");
 
+    // --- CAVALO COM LOOPS COMPLEXOS (Exigência do Desafio) ---
+    printf("Cavalo em L (Cima e Direita):\n");
+    
+    // Usando múltiplas variáveis (i e j) e Continue/Break
+    for (int i = 1, j = 2; i <= 1; i++) { // i controla o movimento total
+        while (j > 0) {
+            printf("Cima\n");  
+            j--;
+            
+            if (j > 0) continue; // "Ainda faltam passos para cima? Então ignore o resto e volte"
+            
+            // Se chegou aqui, é porque o j acabou (é 0)
+            printf("Direita\n");
+            break; // "Já fiz o L, agora pare tudo e saia desse loop"
+        }
+    }
+    
     return 0;
 }
